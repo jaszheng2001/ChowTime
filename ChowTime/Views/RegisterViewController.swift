@@ -51,6 +51,8 @@ class RegisterViewController: UIViewController {
 }
 
 extension RegisterViewController: PlannerDelegate {
+    func didReceivedGeneratorData(_ data: GeneratorData) {}
+    
     func didReceivedMealData(_ data: DailyMealPlanData) {}
     
     func didReceivedUserData(_ data: ConnectUserData) {

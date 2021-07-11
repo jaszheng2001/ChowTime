@@ -29,6 +29,10 @@
 		96A8DCEA263B416B00585209 /* ChowTimeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A8DCE9263B416B00585209 /* ChowTimeUITests.swift */; };
 		96A8DCFB263B42C000585209 /* RecipeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A8DCFA263B42C000585209 /* RecipeManager.swift */; };
 		96C57611268E39E200BA18E3 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C57610268E39E200BA18E3 /* Keys.swift */; };
+		96C576162699FD8000BA18E3 /* PlannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C576152699FD8000BA18E3 /* PlannerViewController.swift */; };
+		96C5761B2699FD9600BA18E3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5761A2699FD9600BA18E3 /* SearchViewController.swift */; };
+		96C57620269A065C00BA18E3 /* CircularProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5761F269A065C00BA18E3 /* CircularProgressBarView.swift */; };
+		96C57625269A66E400BA18E3 /* PlannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C57624269A66E400BA18E3 /* PlannerCell.swift */; };
 		AE2E34A7E7C4AC2583C7636C /* Pods_ChowTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551C230CE1A9021419F496CA /* Pods_ChowTime.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +86,10 @@
 		96A8DCEB263B416B00585209 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96A8DCFA263B42C000585209 /* RecipeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManager.swift; sourceTree = "<group>"; };
 		96C57610268E39E200BA18E3 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		96C576152699FD8000BA18E3 /* PlannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerViewController.swift; sourceTree = "<group>"; };
+		96C5761A2699FD9600BA18E3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		96C5761F269A065C00BA18E3 /* CircularProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBarView.swift; sourceTree = "<group>"; };
+		96C57624269A66E400BA18E3 /* PlannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerCell.swift; sourceTree = "<group>"; };
 		C143C1F6EAA68A5C5C6BA3E8 /* Pods-ChowTimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChowTimeTests.release.xcconfig"; path = "Target Support Files/Pods-ChowTimeTests/Pods-ChowTimeTests.release.xcconfig"; sourceTree = "<group>"; };
 		CAB38942FF84463FED575F9C /* Pods-ChowTimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChowTimeTests.debug.xcconfig"; path = "Target Support Files/Pods-ChowTimeTests/Pods-ChowTimeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA7BE8A3409883610DCBE5D5 /* Pods_ChowTime_ChowTimeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChowTime_ChowTimeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +154,10 @@
 				969A3CCE267CF77300B64A7E /* ProfileViewController.swift */,
 				969A3CD6267F089C00B64A7E /* RecommendedCollectionViewCell.swift */,
 				9610D703268CE93B0099423B /* GeneratorViewCell.swift */,
+				96C576152699FD8000BA18E3 /* PlannerViewController.swift */,
+				96C5761A2699FD9600BA18E3 /* SearchViewController.swift */,
+				96C5761F269A065C00BA18E3 /* CircularProgressBarView.swift */,
+				96C57624269A66E400BA18E3 /* PlannerCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -469,10 +481,14 @@
 				965ABCFE2688FEBA0061EBF6 /* RecipePlannerManager.swift in Sources */,
 				96A8DCFB263B42C000585209 /* RecipeManager.swift in Sources */,
 				969A3CC1267702C600B64A7E /* DashboardViewController.swift in Sources */,
+				96C5761B2699FD9600BA18E3 /* SearchViewController.swift in Sources */,
+				96C57620269A065C00BA18E3 /* CircularProgressBarView.swift in Sources */,
 				969A3CB42676738E00B64A7E /* WelcomeViewController.swift in Sources */,
 				96C57611268E39E200BA18E3 /* Keys.swift in Sources */,
+				96C576162699FD8000BA18E3 /* PlannerViewController.swift in Sources */,
 				96A8DCCF263B416800585209 /* ChowTime.xcdatamodeld in Sources */,
 				969A3CBC2676AA7200B64A7E /* RegisterViewController.swift in Sources */,
+				96C57625269A66E400BA18E3 /* PlannerCell.swift in Sources */,
 				965ABD0326890A5C0061EBF6 /* PlannerData.swift in Sources */,
 				965ABCE62686DEE00061EBF6 /* Constants.swift in Sources */,
 				96A8DCC5263B416800585209 /* AppDelegate.swift in Sources */,

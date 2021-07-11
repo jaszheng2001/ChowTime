@@ -11,10 +11,11 @@ import AlamofireImage
 class DashboardViewController: UIViewController {
     @IBOutlet weak var dailyCaloriesLabel: UILabel!
     @IBOutlet weak var recommendedCollectionView: UICollectionView!
-    @IBOutlet weak var caloriesProgress: UIProgressView!
+    @IBOutlet weak var progressBar: CircularProgressBarView!
     @IBOutlet weak var generatorTableView: UITableView!
     var recommendedRecipes: RecipeData?
     var mealGenerator: [MealPlanItemValue]?
+    var generatorNutrients: DailyNutrients?
     var recipeManager = RecipeManager()
     var recipePlanner = RecipePlannerManager()
     
@@ -28,11 +29,17 @@ class DashboardViewController: UIViewController {
         recipePlanner.delegate = self
         recipePlanner.getTodayMealPlan()
         generatorTableView.dataSource = self
+        progressBar.progressClr = UIColor(red: 0, green: 0.3373, blue: 0.8784, alpha: 1.0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("view did appear")
     }
 }
 
@@ -75,15 +82,23 @@ extension DashboardViewController:
 
 extension DashboardViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mealGenerator?.count ?? 4
+        return mealGenerator?.count ?? 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GeneratorViewCell") as! GeneratorViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GeneratorViewCell", for: indexPath) as! GeneratorViewCell
+        if let meal = mealGenerator?[indexPath.item] {
+            cell.recipeId = meal.id
+            let urlString = "https://spoonacular.com/recipeImages/\(meal.id!)-90x90.\(meal.imageType!)"
+            let url = URL(string: urlString)!
+            print(url)
+            cell.recipeImageView.af.setImage(withURL: url)
+            cell.nameLabel.text = meal.title
+            cell.timeLabel.text = "\(String(meal.readyInMinutes ?? 0)) Minutes"
+            cell.servingsLabel.text = "\(String(meal.servings ?? 1)) People"
+        }
         return cell
     }
-    
-    
 }
 
 extension DashboardViewController: RecipeManagerDelegate{
@@ -102,14 +117,25 @@ extension DashboardViewController: PlannerDelegate {
         DispatchQueue.main.async {
             if data == nil {
                 self.dailyCaloriesLabel.text = "0"
-                self.caloriesProgress.progress = 0.0
+                self.progressBar.setProgressWithAnimation(duration: 1, value: 0.0)
+                self.recipePlanner.generateMealPlan(tFrame: "day", target: 2000)
+            } else {
+                if let calories = data?.nutritionSummary?["nutrients"]?[0].amount {
+                    self.dailyCaloriesLabel.text = String(Int(calories))
+                    self.recipePlanner.generateMealPlan(tFrame: "day", target: 2000 - Int(calories))
+                }
+                if let progress = data?.nutritionSummary?["nutrients"]?[0].percentDailyNeeds {
+                    self.progressBar.setProgressWithAnimation(duration: 1, value: Float(Float(progress)/100))
+                }
             }
-            if let calories = data?.nutritionSummary?["nutrients"]?[0].amount {
-                self.dailyCaloriesLabel.text = String(Int(calories))
-            }
-            if let progress = data?.nutritionSummary?["nutrients"]?[0].percentDailyNeeds {
-                self.caloriesProgress.progress = Float(Float(progress)/100)
-            }
+        }
+    }
+    
+    func didReceivedGeneratorData(_ data: GeneratorData) {
+        DispatchQueue.main.async {
+            self.mealGenerator = data.meals
+            self.generatorNutrients = data.nutrients
+            self.generatorTableView.reloadData()
         }
     }
 }

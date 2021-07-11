@@ -33,6 +33,20 @@ struct MealPlanItem: Decodable {
 
 struct MealPlanItemValue: Decodable {
     let id: Int?
+    let imageType: String?
     let servings: Int?
+    let readyInMinutes: Int?
     let title: String?
+}
+
+struct GeneratorData: Decodable {
+    let meals: [MealPlanItemValue]
+    let nutrients: DailyNutrients
+}
+
+struct DailyNutrients: Decodable {
+    let calories: Float
+    let protein: Float
+    let fat: Float
+    let carbohydrates: Float
 }

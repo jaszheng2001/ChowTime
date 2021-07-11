@@ -10,6 +10,7 @@ import Parse
 protocol PlannerDelegate {
     func didReceivedUserData(_ data: ConnectUserData)
     func didReceivedMealData(_ data: DailyMealPlanData?)
+    func didReceivedGeneratorData(_ data: GeneratorData)
 }
 
 extension PlannerDelegate {
@@ -95,6 +96,28 @@ struct RecipePlannerManager {
                             if let safeData = data {
                                 print(String(data: safeData, encoding: .utf8)!)
                             }
+                        }
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    func generateMealPlan(tFrame: String, target: Int) {
+        if let url = URL(string: "https://api.spoonacular.com/mealplanner/generate?apiKey=\(Keys.SPOON_KEY)&timeFrame=\(tFrame)&targetCalories=\(target)") {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                if error != nil {
+                    print(error!)
+                } else {
+                    if let safeData = data {
+                        do {
+                            let decoder = JSONDecoder()
+                            let decodedData = try decoder.decode(GeneratorData.self, from: safeData)
+                            print(decodedData)
+                            self.delegate?.didReceivedGeneratorData(decodedData)
+                        } catch {
+                            print("error: ", error)
                         }
                     }
                 }

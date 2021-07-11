@@ -8,22 +8,42 @@
 import UIKit
 
 class PlannerViewController: UIViewController {
-
+    @IBOutlet weak var caloriesPB: CircularProgressBarView!
+    @IBOutlet weak var fatPB: CircularProgressBarView!
+    @IBOutlet weak var carbPB: CircularProgressBarView!
+    @IBOutlet weak var proteinsPB: CircularProgressBarView!
+    @IBOutlet weak var plannerTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        caloriesPB.progressClr = UIColor.systemBlue
+        fatPB.progressClr = UIColor.systemGreen
+        carbPB.progressClr = UIColor.systemPink
+        proteinsPB.progressClr = UIColor.systemOrange
+        plannerTableView.dataSource = self
+        plannerTableView.delegate = self
+        caloriesPB.setProgressWithAnimation(duration: 1, value: 0.8)
+        fatPB.setProgressWithAnimation(duration: 1, value: 0.6)
+        carbPB.setProgressWithAnimation(duration: 1, value: 0.8)
+        proteinsPB.setProgressWithAnimation(duration: 1, value: 0.8)
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.navigationItem.hidesBackButton = true
     }
-    */
+}
 
+extension PlannerViewController: UITableViewDelegate{}
+
+extension PlannerViewController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlannerCell") as! PlannerCell
+        return cell
+    }
 }

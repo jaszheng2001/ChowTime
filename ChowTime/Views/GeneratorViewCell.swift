@@ -9,9 +9,14 @@ import UIKit
 
 class GeneratorViewCell: UITableViewCell {
     @IBOutlet weak var recipeImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var servingsLabel: UILabel!
+    var recipeId: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
         // Initialization code
     }
 
@@ -20,5 +25,8 @@ class GeneratorViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    @IBAction func addToPlanner(_ sender: Any) {
+        print(nameLabel.text)
+    }
+    
 }

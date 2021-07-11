@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if PFUser.current() != nil {
             let main = UIStoryboard(name: "Main", bundle: nil)
-            let dashboardViewController = main.instantiateViewController(withIdentifier: "DashboardViewController")
+            let dashboardViewController = main.instantiateViewController(withIdentifier: "DashboardTabController")
             window?.rootViewController = dashboardViewController
         }
     }

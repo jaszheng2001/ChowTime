@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "1BE72398-CAA6-40D6-96C5-DB5ACA741A6B"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "89F16F26-AF25-437A-95DF-67061A89310F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChowTime/Views/DashboardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "DashboardViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "89F16F26-AF25-437A-95DF-67061A89310F - eda3168e0a649e68"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChowTime.DashboardViewController.recommendedCollectionView.getter : Swift.Optional&lt;__C.UICollectionView&gt;"
+                  moduleName = "ChowTime"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jason/Desktop/ChowTime/ChowTime/Views/DashboardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "89F16F26-AF25-437A-95DF-67061A89310F - 8f6a5a0a21f66b9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChowTime.DashboardViewController.recommendedCollectionView.setter : Swift.Optional&lt;__C.UICollectionView&gt;"
+                  moduleName = "ChowTime"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jason/Desktop/ChowTime/ChowTime/Views/DashboardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "155">
+               </Location>
+               <Location
+                  uuid = "89F16F26-AF25-437A-95DF-67061A89310F - 51484708fd650cd2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChowTime.DashboardViewController.recommendedCollectionView.modify : Swift.Optional&lt;__C.UICollectionView&gt;"
+                  moduleName = "ChowTime"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jason/Desktop/ChowTime/ChowTime/Views/DashboardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "59">
+               </Location>
+               <Location
+                  uuid = "89F16F26-AF25-437A-95DF-67061A89310F - 7b81404e0ea730b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChowTime.DashboardViewController.recommendedCollectionView.modify : Swift.Optional&lt;__C.UICollectionView&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "ChowTime"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jason/Desktop/ChowTime/ChowTime/Views/DashboardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "89F16F26-AF25-437A-95DF-67061A89310F - dd0cbf8472b9fd8a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChowTime.DashboardViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; ChowTime.DashboardViewController"
+                  moduleName = "ChowTime"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jason/Desktop/ChowTime/ChowTime/Views/DashboardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "485">
+               </Location>
+               <Location
+                  uuid = "89F16F26-AF25-437A-95DF-67061A89310F - 6d5d5d83c838ea66"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChowTime.DashboardViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;ChowTime.DashboardViewController&gt;"
+                  moduleName = "ChowTime"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jason/Desktop/ChowTime/ChowTime/Views/DashboardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "426">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
