@@ -16,6 +16,7 @@ class DashboardViewController: UIViewController {
     var recommendedRecipes: RecipeData?
     var mealGenerator: [MealPlanItemValue]?
     var generatorNutrients: DailyNutrients?
+    var genCellStatus = [Bool]()
     var recipeManager = RecipeManager()
     var recipePlanner = RecipePlannerManager()
     
@@ -27,7 +28,7 @@ class DashboardViewController: UIViewController {
         recipeManager.delegate = self
         recipeManager.fetchRecipeBySearch(search: "Chicken Wing", number: 5, offset: 0)
         recipePlanner.delegate = self
-        recipePlanner.getTodayMealPlan()
+        recipePlanner.getTodayMealPlan(update: false)
         generatorTableView.dataSource = self
         progressBar.progressClr = UIColor(red: 0, green: 0.3373, blue: 0.8784, alpha: 1.0)
     }
@@ -35,11 +36,14 @@ class DashboardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
+        recipePlanner.getTodayMealPlan(update: true)
+        }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("view did appear")
+    }
+    @IBAction func refreshGen(_ sender: Any) {
+        recipePlanner.getTodayMealPlan(update: false)
     }
 }
 
@@ -76,6 +80,7 @@ extension DashboardViewController:
             let url = URL(string: urlString)!
             cell.recipeImageView.af.setImage(withURL: url)
         }
+        
         return cell
     }
 }
@@ -87,8 +92,10 @@ extension DashboardViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GeneratorViewCell", for: indexPath) as! GeneratorViewCell
+        cell.prevVC = self
+        cell.index = indexPath.item
         if let meal = mealGenerator?[indexPath.item] {
-            cell.recipeId = meal.id
+            cell.meal = meal
             let urlString = "https://spoonacular.com/recipeImages/\(meal.id!)-90x90.\(meal.imageType!)"
             let url = URL(string: urlString)!
             print(url)
@@ -96,6 +103,11 @@ extension DashboardViewController: UITableViewDataSource{
             cell.nameLabel.text = meal.title
             cell.timeLabel.text = "\(String(meal.readyInMinutes ?? 0)) Minutes"
             cell.servingsLabel.text = "\(String(meal.servings ?? 1)) People"
+            if genCellStatus[indexPath.item] == false {
+                cell.addButton.setTitle("ADD TO PLANNER", for: .normal)
+                cell.addButton.setTitleColor(UIColor.systemGray6, for: .normal)
+                cell.addButton.isEnabled = true
+            }
         }
         return cell
     }
@@ -111,9 +123,12 @@ extension DashboardViewController: RecipeManagerDelegate{
 }
 
 extension DashboardViewController: PlannerDelegate {
+    func didUpdatedPlanner() {
+    }
+    
     func didReceivedUserData(_ data: ConnectUserData) {}
     
-    func didReceivedMealData(_ data: DailyMealPlanData?) {
+    func didReceivedMealData(_ data: DailyMealPlanData?, _ update: Bool) {
         DispatchQueue.main.async {
             if data == nil {
                 self.dailyCaloriesLabel.text = "0"
@@ -122,10 +137,14 @@ extension DashboardViewController: PlannerDelegate {
             } else {
                 if let calories = data?.nutritionSummary?["nutrients"]?[0].amount {
                     self.dailyCaloriesLabel.text = String(Int(calories))
-                    self.recipePlanner.generateMealPlan(tFrame: "day", target: 2000 - Int(calories))
+                    if update == false{
+                        self.recipePlanner.generateMealPlan(tFrame: "day", target: 2000 - Int(calories))
+                    }
                 }
                 if let progress = data?.nutritionSummary?["nutrients"]?[0].percentDailyNeeds {
-                    self.progressBar.setProgressWithAnimation(duration: 1, value: Float(Float(progress)/100))
+                    if self.progressBar.prog != Float(Float(progress)/100) {
+                        self.progressBar.setProgressWithAnimation(duration: 1, value: Float(Float(progress)/100))
+                    }
                 }
             }
         }
@@ -133,6 +152,7 @@ extension DashboardViewController: PlannerDelegate {
     
     func didReceivedGeneratorData(_ data: GeneratorData) {
         DispatchQueue.main.async {
+            self.genCellStatus = Array(repeating: false, count: data.meals.count)
             self.mealGenerator = data.meals
             self.generatorNutrients = data.nutrients
             self.generatorTableView.reloadData()

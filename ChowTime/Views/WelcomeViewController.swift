@@ -47,6 +47,4 @@ extension WelcomeViewController: RecipeManagerDelegate {
     func didReceivedRecipe(_ recipe: RecipeData) {
         recommendedRecipes = recipe
     }
-    
-    
 }

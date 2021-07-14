@@ -9,7 +9,8 @@ import UIKit
 
 class CircularProgressBarView: UIView {
     var progressLyr = CAShapeLayer()
-       var trackLyr = CAShapeLayer()
+    var trackLyr = CAShapeLayer()
+    var prog = Float(0)
        required init?(coder aDecoder: NSCoder) {
           super.init(coder: aDecoder)
           makeCircularPath()
@@ -42,11 +43,12 @@ class CircularProgressBarView: UIView {
           layer.addSublayer(progressLyr)
        }
        func setProgressWithAnimation(duration: TimeInterval, value: Float) {
+          prog = value
           let animation = CABasicAnimation(keyPath: "strokeEnd")
           animation.duration = duration
           animation.fromValue = 0
           animation.toValue = value
-        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+          animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
           progressLyr.strokeEnd = CGFloat(value)
           progressLyr.add(animation, forKey: "animateprogress")
        }

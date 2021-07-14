@@ -20,7 +20,7 @@ struct DailyMealPlanData: Decodable {
     let nutritionSummaryDinner: [String: [Nutrient]]?
     let date: Int?
     let day: String?
-    let item: [MealPlanItem]?
+    let items: [MealPlanItem]?
 }
 
 struct MealPlanItem: Decodable {
