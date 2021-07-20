@@ -46,7 +46,7 @@ extension PlannerCell: PlannerDelegate{
     func didUpdatedPlanner() {
         if let view = prevView {
             let vc = view as! PlannerViewController
-            vc.plannerManager.getTodayMealPlan(update: true)
+            vc.plannerManager.getTodayMealPlan(update: false)
         }
     }
     

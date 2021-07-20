@@ -44,6 +44,10 @@ class WelcomeViewController: UIViewController {
 }
 
 extension WelcomeViewController: RecipeManagerDelegate {
+    func didReceivedSingleRecipe(_ recipe: Recipe) {
+        
+    }
+    
     func didReceivedRecipe(_ recipe: RecipeData) {
         recommendedRecipes = recipe
     }

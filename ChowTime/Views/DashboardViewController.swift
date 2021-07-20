@@ -19,6 +19,9 @@ class DashboardViewController: UIViewController {
     var genCellStatus = [Bool]()
     var recipeManager = RecipeManager()
     var recipePlanner = RecipePlannerManager()
+    var selectedType: String?
+    var selectedID: Int?
+    var selectedRecipeData: Recipe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,7 @@ class DashboardViewController: UIViewController {
         recipePlanner.delegate = self
         recipePlanner.getTodayMealPlan(update: false)
         generatorTableView.dataSource = self
+        generatorTableView.delegate = self
         progressBar.progressClr = UIColor(red: 0, green: 0.3373, blue: 0.8784, alpha: 1.0)
     }
     
@@ -37,11 +41,27 @@ class DashboardViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         recipePlanner.getTodayMealPlan(update: true)
-        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        selectedType = nil
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "RecipeCard") {
+            let dest = segue.destination as! RecipeViewController
+            dest.id = selectedID
+            if  (selectedType == "Recommended") {
+                dest.recipeData = selectedRecipeData
+            }
+        }
+    }
+    
     @IBAction func refreshGen(_ sender: Any) {
         recipePlanner.getTodayMealPlan(update: false)
     }
@@ -67,6 +87,14 @@ extension DashboardViewController:
         return 5
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedType = "Recommended"
+        let recipe = recommendedRecipes?.results[indexPath.item]
+        selectedID = recipe?.id
+        selectedRecipeData = recipe
+        self.performSegue(withIdentifier: "RecipeCard", sender: nil)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendedCollectionViewCell", for: indexPath) as! RecommendedCollectionViewCell
         let recipe = recommendedRecipes?.results[indexPath.item]
@@ -85,6 +113,14 @@ extension DashboardViewController:
     }
 }
 
+extension DashboardViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedType = "Planner"
+        selectedID = mealGenerator?[indexPath.item].id
+        self.performSegue(withIdentifier: "RecipeCard", sender: nil)
+    }
+}
+
 extension DashboardViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mealGenerator?.count ?? 3
@@ -98,7 +134,6 @@ extension DashboardViewController: UITableViewDataSource{
             cell.meal = meal
             let urlString = "https://spoonacular.com/recipeImages/\(meal.id!)-90x90.\(meal.imageType!)"
             let url = URL(string: urlString)!
-            print(url)
             cell.recipeImageView.af.setImage(withURL: url)
             cell.nameLabel.text = meal.title
             cell.timeLabel.text = "\(String(meal.readyInMinutes ?? 0)) Minutes"
@@ -114,6 +149,9 @@ extension DashboardViewController: UITableViewDataSource{
 }
 
 extension DashboardViewController: RecipeManagerDelegate{
+    func didReceivedSingleRecipe(_ recipe: Recipe) {
+    }
+    
     func didReceivedRecipe(_ recipe: RecipeData) {
         recommendedRecipes = recipe
         DispatchQueue.main.async {

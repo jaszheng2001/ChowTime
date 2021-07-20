@@ -9,5 +9,4 @@ import UIKit
 
 class CatCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var catLabel: UILabel!
-    
 }

@@ -8,23 +8,52 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-    private let spacing:CGFloat = 10.0
+    private let spacing: CGFloat = 10.0
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var catCollectionView: UICollectionView!
     let categories = ["African",  "American",  "British",  "Cajun",  "Caribbean",  "Chinese",  "Eastern",  "European",  "European",  "French",  "German",  "Greek",  "Indian",  "Irish",  "Italian",  "Japanese",  "Jewish",  "Korean",  "Latin",  "American",  "Mediterranean",  "Mexican",  "Middle",  "Eastern",  "Nordic",  "Southern",  "Spanish",  "Thai",  "Vietnamese"]
+    var catSelected: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.titleView = searchBar
         searchBar.delegate = self
         catCollectionView.delegate = self
         catCollectionView.dataSource = self
         // Do any additional setup after loading the view.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue .identifier == "ResultsView" {
+            let dest = segue.destination as! ResultsViewController
+            if let category = catSelected {
+                dest.category = category
+            } else {
+                dest.searchText = searchBar.text!
+            }
+        }
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            print("searchText \(searchBar.text)")
+            if searchBar.text != "" {
+                catSelected = nil
+                performSegue(withIdentifier: "ResultsView", sender: nil)
+            }
         }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        searchBar.text = ""
+    }
 }
 
 extension SearchViewController: UICollectionViewDelegate{
@@ -40,6 +69,11 @@ extension SearchViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatCollectionViewCell", for: indexPath) as! CatCollectionViewCell
         cell.catLabel.text = categories[indexPath.item]
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        catSelected = categories[indexPath.item]
+        performSegue(withIdentifier: "ResultsView", sender: nil)
     }
 }
 
