@@ -13,6 +13,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var recommendedCollectionView: UICollectionView!
     @IBOutlet weak var progressBar: CircularProgressBarView!
     @IBOutlet weak var generatorTableView: UITableView!
+    @IBOutlet weak var dateField: UILabel!
+    var date = Date()
     var recommendedRecipes: RecipeData?
     var mealGenerator: [MealPlanItemValue]?
     var generatorNutrients: DailyNutrients?
@@ -62,6 +64,38 @@ class DashboardViewController: UIViewController {
         }
     }
     
+    @IBAction func backPressed(_ sender: Any) {
+        date = date.dayBefore
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        var day = formatter.string(from: date)
+        let today = formatter.string(from: Date())
+        if (day == today) {
+            dateField.text = "Today"
+        } else {
+            dateField.text = day
+        }
+        formatter.dateFormat = "yyyy-MM-dd"
+        day = formatter.string(from: date)
+        recipePlanner.getMealPlanByDay(date: day, updateNutrOnly: false)
+    }
+    
+    @IBAction func forwardPressed(_ sender: Any) {
+        date = date.dayAfter
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        var day = formatter.string(from: date)
+        let today = formatter.string(from: Date())
+        if (day == today) {
+            dateField.text = "Today"
+        } else {
+            dateField.text = day
+        }
+        formatter.dateFormat = "yyyy-MM-dd"
+        day = formatter.string(from: date)
+        recipePlanner.getMealPlanByDay(date: day, updateNutrOnly: false)
+    }
+    
     @IBAction func refreshGen(_ sender: Any) {
         recipePlanner.getTodayMealPlan(update: false)
     }
@@ -101,7 +135,7 @@ extension DashboardViewController:
         if let title = recipe?.title {
             cell.recipeNameLabel.text = title
         }
-        if let calories = recipe?.nutrition?["nutrients"]?[0].amount {
+        if let calories = recipe?.nutrition?.nutrients?[0].amount {
             cell.caloriesLabel.text = "\(String(Int(calories))) Calories"
         }
         if let urlString = recipe?.image {

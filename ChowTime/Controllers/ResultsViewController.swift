@@ -74,7 +74,7 @@ extension ResultsViewController: UITableViewDataSource {
             if let servings = recipe.servings {
                 cell.servingsLabel.text = "\(servings) People"
             }
-            if let calories = recipe.nutrition?["nutrients"]?[0].amount {
+            if let calories = recipe.nutrition?.nutrients?[0].amount {
                 cell.caloriesLabel.text = "\(String(Int(calories))) Calories"
             }
         }

@@ -81,7 +81,7 @@ class PlannerViewController: UIViewController {
         }
     
     @IBAction func backPressed(_ sender: Any) {
-        date = Date().dayBefore
+        date = date.dayBefore
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, yyyy"
         var day = formatter.string(from: date)
@@ -92,7 +92,7 @@ class PlannerViewController: UIViewController {
     }
     
     @IBAction func forwardPressed(_ sender: Any) {
-        date = Date().dayAfter
+        date = date.dayAfter
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, yyyy"
         var day = formatter.string(from: date)

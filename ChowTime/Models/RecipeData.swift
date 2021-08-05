@@ -20,7 +20,7 @@ struct Recipe: Decodable {
     let image: String?
     let imageType: String?
     let extendedIngredients: [Ingredients]?
-    let nutrition: [String:[Nutrient]]?
+    let nutrition: Nutrients?
     let vegetarian: Bool?
     let vegan: Bool?
     let glutenFree: Bool?
@@ -70,11 +70,16 @@ struct Steps: Decodable, CustomStringConvertible {
     var description: String {return "\(String(number ?? 1)). \(step ?? "")"}
 }
 
-struct Nutrient: Decodable {
+struct Nutrients: Decodable {
+    let nutrients: [Nutrient]?
+}
+
+struct Nutrient: Decodable, CustomStringConvertible {
     let title: String?
     let name: String?
     let amount: Double?
     let unit: String?
     let percentDailyNeeds: Int?
     let indented: Bool?
+    var description: String {return "\(String(amount ?? 0)) \(unit ?? "") \(name == nil ? "" : name!)"}
 }

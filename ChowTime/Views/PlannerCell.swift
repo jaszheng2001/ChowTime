@@ -46,7 +46,11 @@ extension PlannerCell: PlannerDelegate{
     func didUpdatedPlanner() {
         if let view = prevView {
             let vc = view as! PlannerViewController
-            vc.plannerManager.getTodayMealPlan(update: false)
+            let date = vc.date
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let day = formatter.string(from: date)
+            vc.plannerManager.getMealPlanByDay(date: day, updateNutrOnly: false)
         }
     }
     

@@ -46,11 +46,13 @@ class RecipeViewController: UIViewController {
             } else {
                 sections?.append(RecipeSection(name: "Instructions", items: ["Instructions not found"]))
             }
+            sections?.append(RecipeSection(name: "Nutrition Fact", items: recipeData?.nutrition?.nutrients))
         } else {
             if let recipeId = id {
                 recipeManager.fetchRecipeById(id: recipeId)
             }
         }
+        print(sections)
         recipeTableView.reloadData()
     }
     

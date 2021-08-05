@@ -14,7 +14,7 @@ protocol RecipeManagerDelegate {
 
 struct RecipeManager {
     var delegate: RecipeManagerDelegate?
-    let recipeSearch = "https://api.spoonacular.com/recipes/complexSearch?apiKey=\(Keys.SPOON_KEY)&minCalories=0&addRecipeInformation=true&fillIngredients=true"
+    let recipeSearch = "https://api.spoonacular.com/recipes/complexSearch?apiKey=\(Keys.SPOON_KEY)&minCalories=0&addRecipeInformation=true&fillIngredients=true&addRecipeNutrition=true"
     let recipeInstruction = "https://api.spoonacular.com/recipes/{id}/analyzedInstructions"
     
     func fetchRecipeBySearch(search: String, number: Int, offset: Int) {
@@ -29,6 +29,7 @@ struct RecipeManager {
     func fetchRecipe(parameter: String, value: String, number: Int, offset: Int){
         var urlString = "\(recipeSearch)&\(parameter)=\(value.split(separator: " ").joined(separator: "+"))"
         urlString += "&number=\(number)&offset=\(offset)"
+        print(urlString)
         if let url = URL(string: urlString) {
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in if error != nil {
                 print(error!)

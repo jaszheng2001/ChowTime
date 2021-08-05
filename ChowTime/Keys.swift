@@ -8,7 +8,7 @@
 import Foundation
 
 struct Keys {
-    static let SPOON_KEY = ""
     static let PARSE_CLIENT = ""
+    static let SPOON_KEY = ""
 }
 

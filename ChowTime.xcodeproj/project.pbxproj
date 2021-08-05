@@ -162,20 +162,11 @@
 			isa = PBXGroup;
 			children = (
 				96A8DCCA263B416800585209 /* Main.storyboard */,
-				969A3CB32676738D00B64A7E /* WelcomeViewController.swift */,
-				969A3CBB2676AA7100B64A7E /* RegisterViewController.swift */,
-				969A3CC0267702C600B64A7E /* DashboardViewController.swift */,
-				969A3CCE267CF77300B64A7E /* ProfileViewController.swift */,
 				969A3CD6267F089C00B64A7E /* RecommendedCollectionViewCell.swift */,
 				9610D703268CE93B0099423B /* GeneratorViewCell.swift */,
-				96C576152699FD8000BA18E3 /* PlannerViewController.swift */,
 				96C57624269A66E400BA18E3 /* PlannerCell.swift */,
-				96C5761A2699FD9600BA18E3 /* SearchViewController.swift */,
 				96C5761F269A065C00BA18E3 /* CircularProgressBarView.swift */,
-				964D8C3E269E5BA4001B40FA /* CatCollectionViewCell.swift */,
-				964D8C43269E8A65001B40FA /* ResultsViewController.swift */,
 				964D8C48269E9266001B40FA /* ResultsCell.swift */,
-				964D8C4D26A1FC2F001B40FA /* RecipeViewController.swift */,
 				964D8C5226A2830B001B40FA /* ImageCell.swift */,
 				964D8C5726A2831E001B40FA /* LabelCell.swift */,
 			);
@@ -186,6 +177,15 @@
 			isa = PBXGroup;
 			children = (
 				96203A2E26A75F00001EEE63 /* Extensions.swift */,
+				964D8C3E269E5BA4001B40FA /* CatCollectionViewCell.swift */,
+				969A3CC0267702C600B64A7E /* DashboardViewController.swift */,
+				96C576152699FD8000BA18E3 /* PlannerViewController.swift */,
+				969A3CCE267CF77300B64A7E /* ProfileViewController.swift */,
+				964D8C4D26A1FC2F001B40FA /* RecipeViewController.swift */,
+				969A3CBB2676AA7100B64A7E /* RegisterViewController.swift */,
+				964D8C43269E8A65001B40FA /* ResultsViewController.swift */,
+				96C5761A2699FD9600BA18E3 /* SearchViewController.swift */,
+				969A3CB32676738D00B64A7E /* WelcomeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
