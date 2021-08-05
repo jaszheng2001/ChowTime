@@ -31,12 +31,16 @@ ChowTime is an app that allows users to browse their favorite recipes and keep t
 
 <br>
 <b>App Demo</b>
+<br>
 New Recommended Recipes
 <img src = "http://g.recordit.co/HA7rJrrr5E.gif" width=250>
+<br>
 View Your Planner and Activites
 <img src = "http://g.recordit.co/gL6c3qacXo.gif" width=250>
+<br>
 Recipe by Your Favorite Cuisine
 <img src = "http://g.recordit.co/mNEJwUENT0.gif" width=250>
+<br>
 Search for Your Favorite Recipe
 <img src = "http://g.recordit.co/3KDSQYBTQv.gif" width=250>
 
